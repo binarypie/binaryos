@@ -1,10 +1,11 @@
+# This build argument allows building different variants (regular vs NVIDIA)
+ARG BASE_IMAGE=ghcr.io/ublue-os/bluefin-dx:stable-daily
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
 
 # Base Image
-# This build argument allows building different variants (regular vs NVIDIA)
-ARG BASE_IMAGE=ghcr.io/ublue-os/bluefin-dx:stable-daily
 FROM ${BASE_IMAGE}
 
 ## Other possible base images include:
