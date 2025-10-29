@@ -29,7 +29,4 @@ dnf5 -y install mako swaybg
 dnf5 -y copr enable wezfurlong/wezterm-nightly
 dnf5 -y install wezterm
 
-# Additional development tools
-dnf5 group install -y --with-optional c-development
-
 # systemctl enable podman.socket
