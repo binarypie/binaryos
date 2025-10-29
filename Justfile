@@ -1,6 +1,8 @@
 export image_name := env("IMAGE_NAME", "image-template") # output image name, usually same as repo name, change as needed
 export default_tag := env("DEFAULT_TAG", "latest")
 export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
+export base_image := env("BASE_IMAGE", "ghcr.io/ublue-os/bluefin-dx:stable-daily")
+export base_image_nvidia := env("BASE_IMAGE_NVIDIA", "ghcr.io/ublue-os/bluefin-dx-nvidia:stable-daily")
 
 alias build-vm := build-qcow2
 alias rebuild-vm := rebuild-qcow2
@@ -73,23 +75,27 @@ sudoif command *args:
 # Arguments:
 #   $target_image - The tag you want to apply to the image (default: $image_name).
 #   $tag - The tag for the image (default: $default_tag).
+#   $base_img - The base image to use (default: $base_image).
 #
 # The script constructs the version string using the tag and the current date.
 # If the git working directory is clean, it also includes the short SHA of the current HEAD.
 #
-# just build $target_image $tag
+# just build $target_image $tag $base_img
 #
 # Example usage:
-#   just build aurora lts
+#   just build binaryos latest
+#   just build binaryos nvidia ghcr.io/ublue-os/bluefin-dx-nvidia:stable-daily
 #
-# This will build an image 'aurora:lts' with DX and GDX enabled.
+# This will build an image with the specified base image.
 #
 
 # Build the image using the specified parameters
-build $target_image=image_name $tag=default_tag:
+build $target_image=image_name $tag=default_tag $base_img=base_image:
     #!/usr/bin/env bash
 
     BUILD_ARGS=()
+    BUILD_ARGS+=("--build-arg" "BASE_IMAGE={{ base_img }}")
+
     if [[ -z "$(git status -s)" ]]; then
         BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
     fi
@@ -97,8 +103,26 @@ build $target_image=image_name $tag=default_tag:
     podman build \
         "${BUILD_ARGS[@]}" \
         --pull=newer \
-        --tag "${target_image}:${tag}" \
+        --tag "{{ target_image }}:{{ tag }}" \
         .
+
+# Build the regular (non-NVIDIA) variant
+[group('Build Variants')]
+build-regular $target_image=image_name:
+    @just build "{{ target_image }}" "{{ default_tag }}" "{{ base_image }}"
+
+# Build the NVIDIA variant
+[group('Build Variants')]
+build-nvidia $target_image=image_name:
+    @just build "{{ target_image }}" "{{ default_tag }}-nvidia" "{{ base_image_nvidia }}"
+
+# Build both variants (regular and NVIDIA)
+[group('Build Variants')]
+build-all $target_image=image_name:
+    @echo "Building regular variant..."
+    @just build-regular "{{ target_image }}"
+    @echo "Building NVIDIA variant..."
+    @just build-nvidia "{{ target_image }}"
 
 # Command: _rootful_load_image
 # Description: This script checks if the current user is root or running under sudo. If not, it attempts to resolve the image tag using podman inspect.

@@ -35,6 +35,15 @@ jobs:
       packages: write
       id-token: write
 
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - base_image: "ghcr.io/ublue-os/bluefin-dx:stable-daily"
+            tag_suffix: ""
+          - base_image: "ghcr.io/ublue-os/bluefin-dx-nvidia:stable-daily"
+            tag_suffix: "-nvidia"
+
     steps:
       - name: Prepare environment
         run: |
@@ -80,12 +89,13 @@ jobs:
         with:
           # This generates all the tags for your image, you can add custom tags here too!
           # Default tags are "$DEFAULT_TAG" and "$DEFAULT_TAG.$date".
+          # Matrix tag_suffix is appended to differentiate variants (e.g., latest vs latest-nvidia)
           tags: |
-            type=raw,value=${{ env.DEFAULT_TAG }}
-            type=raw,value=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
-            type=raw,value={{date 'YYYYMMDD'}}
-            type=sha,enable=${{ github.event_name == 'pull_request' }}
-            type=ref,event=pr
+            type=raw,value=${{ env.DEFAULT_TAG }}${{ matrix.variant.tag_suffix }}
+            type=raw,value=${{ env.DEFAULT_TAG }}${{ matrix.variant.tag_suffix }}.{{date 'YYYYMMDD'}}
+            type=raw,value={{date 'YYYYMMDD'}}${{ matrix.variant.tag_suffix }}
+            type=sha,enable=${{ github.event_name == 'pull_request' }},suffix=${{ matrix.variant.tag_suffix }}
+            type=ref,event=pr,suffix=${{ matrix.variant.tag_suffix }}
           labels: |
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/refs/heads/main/README.md
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
@@ -116,6 +126,8 @@ jobs:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
+          build-args: |
+            BASE_IMAGE=${{ matrix.variant.base_image }}
           oci: false
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.

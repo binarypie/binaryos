@@ -9,16 +9,27 @@ set -ouex pipefail
 # List of rpmfusion packages can be found here:
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
-# this installs a package from fedora repos
-dnf5 install -y tmux 
+# hyprland COPR from solopasha
+dnf5 -y copr enable solopasha/hyprland
+dnf5 -y install xdg-desktop-portal-hyprland hyprland hyprland-contrib hyprland-plugins hyprpaper hyprpicker hypridle hyprshot hyprlock pyprland waybar-git xdg-desktop-portal-hyprland hyprland-qtutils
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
+# Walker
+dnf5 -y copr enable errornointernet/walker
+dnf5 -y install walker
+dnf5 -y install elephant
 
-#### Example for enabling a System Unit File
+# swayosd
+dnf5 -y copr enable markupstart/SwayOSD
+dnf5 -y install swayosd
 
-systemctl enable podman.socket
+# other related packages found in main Fedora repos:
+dnf5 -y install mako swaybg
+
+# Wezterm
+dnf5 -y copr enable wezfurlong/wezterm-nightly
+dnf5 -y install wezterm
+
+# Additional development tools
+dnf5 group install -y --with-optional c-development
+
+# systemctl enable podman.socket
