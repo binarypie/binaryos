@@ -1,0 +1,22 @@
+NAME="BinaryOS"
+ID=binaryos
+ID_LIKE="rhel fedora"
+VERSION_CODENAME=""
+PLATFORM_ID="platform:f41"
+PRETTY_NAME="BinaryOS"
+ANSI_COLOR="0;38;2;60;110;180"
+LOGO=fedora-logo-icon
+CPE_NAME="cpe:/o:fedoraproject:fedora:41"
+DEFAULT_HOSTNAME="binaryos"
+HOME_URL="https://github.com/binarypie/binaryos"
+DOCUMENTATION_URL="https://github.com/binarypie/binaryos"
+SUPPORT_URL="https://github.com/binarypie/binaryos/issues"
+BUG_REPORT_URL="https://github.com/binarypie/binaryos/issues"
+REDHAT_BUGZILLA_PRODUCT="Fedora"
+REDHAT_BUGZILLA_PRODUCT_VERSION=41
+REDHAT_SUPPORT_PRODUCT="Fedora"
+REDHAT_SUPPORT_PRODUCT_VERSION=41
+SUPPORT_END=2025-11-12
+VARIANT="BinaryOS"
+VARIANT_ID=binaryos
+
