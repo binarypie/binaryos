@@ -10,6 +10,13 @@ BinaryOS builds on Bluefin-DX's excellent developer experience foundation and ad
 - **Opinionated Development Tools**: A curated set of tools and configurations optimized for my development workflow
 - **Personal Preferences**: Custom configurations and tweaks that I've found useful over time
 
+### Available Variants
+
+BinaryOS is available in two variants:
+
+- **Regular**: Built on `bluefin-dx:stable-daily` for systems with Intel/AMD graphics
+- **NVIDIA**: Built on `bluefin-dx-nvidia:stable-daily` with NVIDIA driver support
+
 This is not meant to be a general-purpose distribution, but rather a personal daily driver that happens to be publicly available for others who might share similar preferences.
 
 ## Community & Support
@@ -34,8 +41,14 @@ While this is a personal image, community contributions are welcome! If you enco
 
 From your existing bootc system, run:
 
+**For systems with Intel/AMD graphics:**
 ```bash
 sudo bootc switch ghcr.io/binarypie/binaryos:latest
+```
+
+**For systems with NVIDIA graphics:**
+```bash
+sudo bootc switch ghcr.io/binarypie/binaryos:latest-nvidia
 ```
 
 Then reboot your system:
@@ -111,7 +124,10 @@ Run `just` without arguments to see all available commands. Here are the most us
 
 #### Building
 
-- `just build` - Build the BinaryOS container image locally
+- `just build` - Build the BinaryOS container image locally (regular variant)
+- `just build-regular` - Build the regular variant (Intel/AMD graphics)
+- `just build-nvidia` - Build the NVIDIA variant
+- `just build-all` - Build both regular and NVIDIA variants
 - `just build-iso` - Build a bootable ISO image
 - `just build-qcow2` - Build a QCOW2 VM image
 - `just build-raw` - Build a raw disk image
