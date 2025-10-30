@@ -34,10 +34,3 @@ dnf5 -y copr enable agriffis/neovim-nightly
 dnf5 -y install neovim python3-neovim
 
 # systemctl enable podman.socket
-
-### BinaryOS Branding
-# os-release file for OS Version
-rsync -rvK /ctx/system_files/ /
-
-# Neutral spinner theme
-plymouth-set-default-theme spinner -R 2>/dev/null || true
