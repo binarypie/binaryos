@@ -13,6 +13,9 @@ set -ouex pipefail
 dnf5 -y copr enable solopasha/hyprland
 dnf5 -y install xdg-desktop-portal-hyprland hyprland hyprland-contrib hyprland-plugins hyprpaper hyprpicker hypridle hyprshot hyprlock pyprland xdg-desktop-portal-hyprland hyprland-qtutils
 
+# CLI Tools
+dnf5 -y install fd-find
+
 # Remove extra things
 # TODO: Figure out what we don't need from solopasha/hyprland
 #
@@ -27,7 +30,7 @@ dnf5 -y install walker
 # Application Launcher
 dnf5 -y copr enable errornointernet/packages
 dnf5 -y install elephant
-elepahant service enable
+elephant service enable
 
 # On Screen Display
 dnf5 -y copr enable markupstart/SwayOSD
@@ -44,9 +47,6 @@ dnf5 -y install wezterm
 # Editor
 dnf5 -y copr enable agriffis/neovim-nightly
 dnf5 -y install neovim python3-neovim
-
-# CLI Tools
-dnf5 -y install fd-find
 
 # Install BinaryOS application configs as system defaults
 # XDG-compliant applications will use these as defaults when users first log in
