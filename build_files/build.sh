@@ -30,7 +30,6 @@ elephant service enable
 
 # Application Launcher - Walker (enable repo and exclude elephant to prevent conflicts)
 dnf5 -y copr enable errornointernet/walker
-dnf5 config-manager --save --setopt='copr:copr.fedorainfracloud.org:errornointernet:walker.excludepkgs=elephant'
 dnf5 -y install walker
 
 # On Screen Display
