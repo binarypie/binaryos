@@ -23,14 +23,10 @@ dnf5 -y install fd-find
 dnf5 -y copr enable killcrb/ashell
 dnf5 -y install ashell
 
-# Application Launcher - Elephant (install first from packages repo)
+# Application Launcher - Walker / Elephant
 dnf5 -y copr enable errornointernet/packages
-dnf5 -y install elephant
+dnf5 -y install elephant walker
 elephant service enable
-
-# Application Launcher - Walker (enable repo and exclude elephant to prevent conflicts)
-dnf5 -y copr enable errornointernet/walker
-dnf5 -y install walker
 
 # On Screen Display
 dnf5 -y copr enable markupstart/SwayOSD
