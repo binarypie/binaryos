@@ -27,6 +27,7 @@ dnf5 -y install walker
 # Application Launcher
 dnf5 -y copr enable errornointernet/packages
 dnf5 -y install elephant
+elepahant service enable
 
 # On Screen Display
 dnf5 -y copr enable markupstart/SwayOSD
@@ -43,6 +44,9 @@ dnf5 -y install wezterm
 # Editor
 dnf5 -y copr enable agriffis/neovim-nightly
 dnf5 -y install neovim python3-neovim
+
+# CLI Tools
+dnf5 -y install fd-find
 
 # Install BinaryOS application configs as system defaults
 # XDG-compliant applications will use these as defaults when users first log in
@@ -74,5 +78,8 @@ cp -r /usr/share/binaryos/config/walker/themes /etc/xdg/walker/
 
 # Gitui configs
 install -Dm644 /usr/share/binaryos/config/gitui/key_bindings.ron /etc/xdg/gitui/key_bindings.ron
+
+# Elephant configs
+install -Dm644 /usr/share/binaryos/config/elephant/elephant.toml /etc/xdg/elephant/elephant.toml
 
 # systemctl enable podman.socket

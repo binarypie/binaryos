@@ -1,0 +1,7 @@
+# Elephant Configuration - BinaryOS
+# Configuration for the Elephant data provider service
+
+# Disable Arch Linux packages provider since we're on Fedora
+[archlinuxpkgs]
+disabled = true
+
