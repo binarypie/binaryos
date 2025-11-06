@@ -8,6 +8,9 @@ COPY build_files /
 # Base Image
 FROM ${BASE_IMAGE}
 
+# Copy dot_files into the image at /usr/share/binaryos/config
+COPY dot_files /usr/share/binaryos/config
+
 ## Other possible base images include:
 # FROM ghcr.io/ublue-os/bazzite:latest
 # FROM ghcr.io/ublue-os/bluefin-dx-nvidia:stable-daily
