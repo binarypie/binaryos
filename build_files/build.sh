@@ -23,6 +23,9 @@ dnf5 -y install ashell
 # Application Launcher
 dnf5 -y copr enable errornointernet/walker
 dnf5 -y install walker
+
+# Application Launcher
+dnf5 -y copr enable errornointernet/packages
 dnf5 -y install elephant
 
 # On Screen Display
@@ -41,11 +44,35 @@ dnf5 -y install wezterm
 dnf5 -y copr enable agriffis/neovim-nightly
 dnf5 -y install neovim python3-neovim
 
-# Install binaryos config setup script and service
-install -Dm755 /ctx/binaryos-config /usr/bin/binaryos-config
-install -Dm644 /ctx/binaryos-config.service /usr/lib/systemd/user/binaryos-config.service
+# Install BinaryOS application configs as system defaults
+# XDG-compliant applications will use these as defaults when users first log in
 
-# Enable hyprland config setup service
-systemctl --global enable binaryos-config.service
+# Hyprland configs
+install -Dm644 /usr/share/binaryos/config/hypr/hyprland.conf /etc/xdg/hypr/hyprland.conf
+install -Dm644 /usr/share/binaryos/config/hypr/hyprlock.conf /etc/xdg/hypr/hyprlock.conf
+install -Dm644 /usr/share/binaryos/config/hypr/hypridle.conf /etc/xdg/hypr/hypridle.conf
+install -Dm644 /usr/share/binaryos/config/hypr/hyprpaper.conf /etc/xdg/hypr/hyprpaper.conf
+
+# Install background image to system location
+install -Dm644 /usr/share/binaryos/config/hypr/background.webp /usr/share/binaryos/hypr/background.webp
+
+# Fish shell configs
+install -Dm644 /usr/share/binaryos/config/fish/config.fish /etc/fish/config.fish
+cp -r /usr/share/binaryos/config/fish/conf.d /etc/fish/
+cp -r /usr/share/binaryos/config/fish/functions /etc/fish/ 2>/dev/null || true
+cp -r /usr/share/binaryos/config/fish/completions /etc/fish/ 2>/dev/null || true
+
+# Neovim configs
+cp -r /usr/share/binaryos/config/nvim /etc/xdg/nvim
+
+# Wezterm configs
+install -Dm644 /usr/share/binaryos/config/wezterm/wezterm.lua /etc/xdg/wezterm/wezterm.lua
+
+# Walker configs
+install -Dm644 /usr/share/binaryos/config/walker/config.toml /etc/xdg/walker/config.toml
+cp -r /usr/share/binaryos/config/walker/themes /etc/xdg/walker/
+
+# Gitui configs
+install -Dm644 /usr/share/binaryos/config/gitui/key_bindings.ron /etc/xdg/gitui/key_bindings.ron
 
 # systemctl enable podman.socket
