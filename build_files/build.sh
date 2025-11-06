@@ -23,13 +23,13 @@ dnf5 -y install fd-find
 dnf5 -y copr enable killcrb/ashell
 dnf5 -y install ashell
 
-# Application Launcher
+# Application Launcher - Walker
 dnf5 -y copr enable errornointernet/walker
 dnf5 -y install walker
 
-# Application Launcher
+# Application Launcher - Elephant (from packages repo, not walker repo)
 dnf5 -y copr enable errornointernet/packages
-dnf5 -y install elephant
+dnf5 -y install --repo='copr:copr.fedorainfracloud.org:errornointernet:packages' elephant
 elephant service enable
 
 # On Screen Display
@@ -70,7 +70,9 @@ cp -r /usr/share/binaryos/config/fish/completions /etc/fish/ 2>/dev/null || true
 cp -r /usr/share/binaryos/config/nvim /etc/xdg/nvim
 
 # Wezterm configs
-install -Dm644 /usr/share/binaryos/config/wezterm/wezterm.lua /etc/xdg/wezterm/wezterm.lua
+# Wezterm doesn't support /etc/xdg for system defaults, so we install to /etc/skel
+# which will be copied to new user home directories
+install -Dm644 /usr/share/binaryos/config/wezterm/wezterm.lua /etc/skel/.config/wezterm/wezterm.lua
 
 # Walker configs
 install -Dm644 /usr/share/binaryos/config/walker/config.toml /etc/xdg/walker/config.toml
