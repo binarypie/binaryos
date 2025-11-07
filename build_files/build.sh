@@ -26,7 +26,7 @@ dnf5 -y install ashell
 
 # Application Launcher - Walker / Elephant
 dnf5 -y copr enable errornointernet/packages
-dnf5 -y install elephant walker-2.7.5
+dnf5 -y install elephant walker-2.7.2
 elephant service enable
 
 # On Screen Display
