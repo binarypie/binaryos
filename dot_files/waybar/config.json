@@ -4,7 +4,7 @@
   "height": 34,
   "spacing": 4,
   "mode": "dock",
-  "start_hidden": true,
+  "start_hidden": false,
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,
