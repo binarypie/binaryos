@@ -10,6 +10,7 @@ set -ouex pipefail
 # https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
 
 # Compositor / Hyprland Utilities
+dnf5 -y clean all
 dnf5 -y copr enable solopasha/hyprland
 dnf5 -y install xdg-desktop-portal-hyprland hyprland hyprland-contrib hyprland-plugins hyprpaper hyprpicker hypridle hyprshot hyprlock pyprland xdg-desktop-portal-hyprland hyprland-qtutils
 
@@ -25,7 +26,7 @@ dnf5 -y install ashell
 
 # Application Launcher - Walker / Elephant
 dnf5 -y copr enable errornointernet/packages
-dnf5 -y install elephant walker
+dnf5 -y install elephant walker-2.8.2
 elephant service enable
 
 # On Screen Display
