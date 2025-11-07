@@ -45,43 +45,21 @@ dnf5 -y install wezterm
 dnf5 -y copr enable agriffis/neovim-nightly
 dnf5 -y install neovim python3-neovim
 
-# Install BinaryOS application configs as system defaults
-# XDG-compliant applications will use these as defaults when users first log in
-
-# Hyprland configs
-install -Dm644 /usr/share/binaryos/config/hypr/hyprland.conf /usr/etc/xdg/hypr/hyprland.conf
-install -Dm644 /usr/share/binaryos/config/hypr/hyprlock.conf /usr/etc/xdg/hypr/hyprlock.conf
-install -Dm644 /usr/share/binaryos/config/hypr/hypridle.conf /usr/etc/xdg/hypr/hypridle.conf
-install -Dm644 /usr/share/binaryos/config/hypr/hyprpaper.conf /usr/etc/xdg/hypr/hyprpaper.conf
-
-# Install background image to system location
-install -Dm644 /usr/share/binaryos/config/hypr/background.webp /usr/share/binaryos/hypr/background.webp
-
 # Fish shell configs
-install -Dm644 /usr/share/binaryos/config/fish/config.fish /usr/etc/fish/config.fish
-cp -r /usr/share/binaryos/config/fish/conf.d /usr/etc/fish/
-cp -r /usr/share/binaryos/config/fish/functions /usr/etc/fish/ 2>/dev/null || true
-cp -r /usr/share/binaryos/config/fish/completions /usr/etc/fish/ 2>/dev/null || true
-
-# Neovim configs
-cp -r /usr/share/binaryos/config/nvim /usr/etc/xdg/nvim
+# Fish doesn't use XDG_CONFIG_DIRS, so we install to /etc/fish
+install -Dm644 /usr/share/binaryos/config/fish/config.fish /etc/fish/config.fish
+cp -r /usr/share/binaryos/config/fish/conf.d /etc/fish/
+cp -r /usr/share/binaryos/config/fish/functions /etc/fish/ 2>/dev/null || true
+cp -r /usr/share/binaryos/config/fish/completions /etc/fish/ 2>/dev/null || true
 
 # Wezterm configs
-# Wezterm doesn't support /etc/xdg for system defaults, so we install to /etc/skel
+# Wezterm doesn't support XDG_CONFIG_DIRS for system defaults, so we install to /etc/skel
 # which will be copied to new user home directories
-install -Dm644 /usr/share/binaryos/config/wezterm/wezterm.lua /usr/etc/skel/.config/wezterm/wezterm.lua
+install -Dm644 /usr/share/binaryos/config/wezterm/wezterm.lua /etc/skel/.config/wezterm/wezterm.lua
 
-# Walker configs
-cp -r /usr/share/binaryos/config/walker/themes /usr/etc/xdg/walker/
-install -Dm644 /usr/share/binaryos/config/walker/config.toml /usr/etc/xdg/walker/config.toml
-
-# Gitui configs
-install -Dm644 /usr/share/binaryos/config/gitui/key_bindings.ron /usr/etc/xdg/gitui/key_bindings.ron
-
-# Elephant configs
-install -Dm644 /usr/share/binaryos/config/elephant/elephant.toml /usr/etc/xdg/elephant/elephant.toml
-
-# Ashell configs
-install -Dm644 /usr/share/binaryos/config/ashell/config.toml /usr/etc/xdg/ashell/config.toml
+# Configure XDG environment for BinaryOS
+# This makes all configs in /usr/share/binaryos/config discoverable
+# while preserving user and admin override capabilities
+install -Dm644 /ctx/60-binaryos-xdg.conf /usr/lib/environment.d/60-binaryos-xdg.conf
 
 # systemctl enable podman.socket
