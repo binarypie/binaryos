@@ -1,0 +1,265 @@
+/* Waybar Tokyo Night Theme */
+/* Based on Tokyo Night Storm color palette */
+
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Font Awesome 6 Free", sans-serif;
+  font-size: 13px;
+  min-height: 0;
+}
+
+/* Tokyo Night Colors */
+@define-color background #1a1b26;
+@define-color background-alt #24283b;
+@define-color foreground #c0caf5;
+@define-color selection #33467c;
+@define-color comment #565f89;
+
+@define-color red #f7768e;
+@define-color orange #ff9e64;
+@define-color yellow #e0af68;
+@define-color green #9ece6a;
+@define-color cyan #7dcfff;
+@define-color blue #7aa2f7;
+@define-color purple #bb9af7;
+@define-color magenta #bb9af7;
+
+@define-color border #414868;
+
+window#waybar {
+  background-color: alpha(@background, 0.95);
+  color: @foreground;
+  transition-property: background-color;
+  transition-duration: 0.3s;
+  border-bottom: 2px solid @border;
+}
+
+window#waybar.hidden {
+  opacity: 0;
+}
+
+/* Workspace Styles */
+#workspaces {
+  background-color: transparent;
+  margin: 4px 8px;
+  padding: 0;
+}
+
+#workspaces button {
+  padding: 0 8px;
+  background-color: transparent;
+  color: @comment;
+  border-radius: 8px;
+  margin: 0 2px;
+  transition: all 0.3s ease;
+}
+
+#workspaces button:hover {
+  background-color: alpha(@blue, 0.2);
+  color: @blue;
+}
+
+#workspaces button.active {
+  background-color: alpha(@blue, 0.3);
+  color: @blue;
+  font-weight: bold;
+}
+
+#workspaces button.urgent {
+  background-color: alpha(@red, 0.3);
+  color: @red;
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Window Title */
+#window {
+  margin: 4px 8px;
+  padding: 4px 12px;
+  background-color: alpha(@background-alt, 0.6);
+  color: @foreground;
+  border-radius: 8px;
+}
+
+/* Clock */
+#clock {
+  margin: 4px 8px;
+  padding: 4px 12px;
+  background-color: alpha(@blue, 0.2);
+  color: @blue;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+/* Privacy Indicators */
+#privacy {
+  margin: 4px 4px;
+  padding: 4px 8px;
+  background-color: alpha(@red, 0.2);
+  color: @red;
+  border-radius: 8px;
+}
+
+#privacy-item {
+  padding: 0 4px;
+}
+
+#privacy-item.screenshare {
+  color: @red;
+}
+
+#privacy-item.audio-in {
+  color: @orange;
+}
+
+#privacy-item.audio-out {
+  color: @yellow;
+}
+
+/* Network */
+#network {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@cyan, 0.2);
+  color: @cyan;
+  border-radius: 8px;
+}
+
+#network.disconnected {
+  background-color: alpha(@red, 0.2);
+  color: @red;
+}
+
+/* Bluetooth */
+#bluetooth {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@blue, 0.2);
+  color: @blue;
+  border-radius: 8px;
+}
+
+#bluetooth.disabled {
+  background-color: alpha(@comment, 0.2);
+  color: @comment;
+}
+
+#bluetooth.connected {
+  background-color: alpha(@green, 0.2);
+  color: @green;
+}
+
+/* Audio */
+#pulseaudio {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@purple, 0.2);
+  color: @purple;
+  border-radius: 8px;
+}
+
+#pulseaudio.muted {
+  background-color: alpha(@red, 0.2);
+  color: @red;
+}
+
+/* CPU */
+#cpu {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@green, 0.2);
+  color: @green;
+  border-radius: 8px;
+}
+
+/* Memory */
+#memory {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@yellow, 0.2);
+  color: @yellow;
+  border-radius: 8px;
+}
+
+#memory.warning {
+  background-color: alpha(@orange, 0.3);
+  color: @orange;
+}
+
+#memory.critical {
+  background-color: alpha(@red, 0.3);
+  color: @red;
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* Temperature */
+#temperature {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@cyan, 0.2);
+  color: @cyan;
+  border-radius: 8px;
+}
+
+#temperature.critical {
+  background-color: alpha(@red, 0.3);
+  color: @red;
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* GPU Temperature */
+#temperature.gpu {
+  background-color: alpha(@magenta, 0.2);
+  color: @magenta;
+}
+
+#temperature.gpu.critical {
+  background-color: alpha(@red, 0.3);
+  color: @red;
+  animation: blink 1s ease-in-out infinite;
+}
+
+/* Disk */
+#disk {
+  margin: 4px 4px;
+  padding: 4px 12px;
+  background-color: alpha(@orange, 0.2);
+  color: @orange;
+  border-radius: 8px;
+}
+
+/* System Tray */
+#tray {
+  margin: 4px 8px;
+  padding: 4px 8px;
+  background-color: alpha(@background-alt, 0.6);
+  border-radius: 8px;
+}
+
+#tray > .passive {
+  -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+  -gtk-icon-effect: highlight;
+  background-color: alpha(@red, 0.3);
+  border-radius: 8px;
+}
+
+/* Tooltip */
+tooltip {
+  background-color: @background-alt;
+  border: 2px solid @border;
+  border-radius: 8px;
+  padding: 8px;
+}
+
+tooltip label {
+  color: @foreground;
+}
+

@@ -12,17 +12,13 @@ set -ouex pipefail
 # Compositor / Hyprland Utilities
 dnf5 -y clean all
 dnf5 -y copr enable solopasha/hyprland
-dnf5 -y install xdg-desktop-portal-hyprland hyprland hyprland-contrib hyprland-plugins hyprpaper hyprpicker hypridle hyprshot hyprlock pyprland xdg-desktop-portal-hyprland hyprland-qtutils
+dnf5 -y install waybar-git xdg-desktop-portal-hyprland hyprland hyprland-contrib hyprland-plugins hyprpaper hyprpicker hypridle hyprshot hyprlock pyprland xdg-desktop-portal-hyprland hyprland-qtutils
 
 # CLI Tools
 dnf5 -y install fd-find
 
 # Remove extra things
 # TODO: Figure out what we don't need from solopasha/hyprland
-#
-# GUI Shell
-dnf5 -y copr enable killcrb/ashell
-dnf5 -y install ashell
 
 # Application Launcher - Walker / Elephant
 dnf5 -y copr enable errornointernet/packages
