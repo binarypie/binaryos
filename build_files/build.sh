@@ -81,4 +81,7 @@ install -Dm644 /usr/share/binaryos/config/gitui/key_bindings.ron /etc/xdg/gitui/
 # Elephant configs
 install -Dm644 /usr/share/binaryos/config/elephant/elephant.toml /etc/xdg/elephant/elephant.toml
 
+# Ashell configs
+install -Dm644 /usr/share/binaryos/config/ashell/config.toml /etc/xdg/ashell/config.toml
+
 # systemctl enable podman.socket

@@ -1,0 +1,181 @@
+# BinaryOS Ashell Configuration - Tokyo Night Theme
+# Configuration file for ashell status bar
+# See: https://malpenzibo.github.io/ashell/docs/configuration
+
+# Bar position (Top or Bottom)
+position = "Top"
+
+# Render on all monitors
+outputs = "All"
+
+# Enable ESC key to close menus
+enable_esc_key = true
+
+# Log level (debug, info, warn, error)
+log_level = "warn"
+
+[appearance]
+# Tokyo Night Storm color palette
+[appearance.palette]
+# Base colors
+background = "#24283b"      # Dark background
+foreground = "#c0caf5"      # Light foreground
+black = "#1d202f"
+red = "#f7768e"
+green = "#9ece6a"
+yellow = "#e0af68"
+blue = "#7aa2f7"
+magenta = "#bb9af7"
+cyan = "#7dcfff"
+white = "#a9b1d6"
+
+# Bright colors
+bright_black = "#414868"
+bright_red = "#f7768e"
+bright_green = "#9ece6a"
+bright_yellow = "#e0af68"
+bright_blue = "#7aa2f7"
+bright_magenta = "#bb9af7"
+bright_cyan = "#7dcfff"
+bright_white = "#c0caf5"
+
+# Additional Tokyo Night colors
+orange = "#ff9e64"
+purple = "#9d7cd8"
+teal = "#1abc9c"
+
+# UI specific colors
+primary = "#7aa2f7"         # Blue
+secondary = "#bb9af7"       # Purple
+success = "#9ece6a"         # Green
+warning = "#e0af68"         # Yellow
+error = "#f7768e"           # Red
+info = "#7dcfff"            # Cyan
+
+[appearance.general]
+# Font configuration
+font_family = "JetBrainsMono Nerd Font"
+font_size = 12.0
+
+# Scaling
+scale = 1.0
+
+# Bar style - "default", "solid", or "gradient"
+style = "solid"
+
+# Opacity settings (0.0 = fully transparent, 1.0 = fully opaque)
+bar_opacity = 0.95
+menu_opacity = 0.98
+
+# Border radius
+border_radius = 8
+
+# Spacing
+spacing = 8
+padding = 4
+
+# Module configuration
+[modules]
+# Left side modules
+left = [
+    "workspaces",
+    "active_window"
+]
+
+# Center modules
+center = [
+    "clock"
+]
+
+# Right side modules
+right = [
+    "system_info",
+    "media_player",
+    "privacy",
+    "tray",
+    "network",
+    "bluetooth",
+    "audio",
+    "battery",
+    "settings"
+]
+
+# Workspaces module
+[modules.workspaces]
+enabled = true
+show_empty = true
+show_special = false
+
+# Active Window module
+[modules.active_window]
+enabled = true
+max_length = 50
+
+# Clock module
+[modules.clock]
+enabled = true
+format = "%a %b %d  %I:%M %p"
+tooltip_format = "%A, %B %d, %Y"
+
+# System Info (CPU, RAM, Temperature)
+[modules.system_info]
+enabled = true
+show_cpu = true
+show_memory = true
+show_temperature = true
+update_interval = 2000  # milliseconds
+
+# Media Player module
+[modules.media_player]
+enabled = true
+max_length = 30
+show_controls = true
+
+# Privacy module (camera, microphone, screenshare indicators)
+[modules.privacy]
+enabled = true
+
+# System Tray module
+[modules.tray]
+enabled = true
+icon_size = 16
+spacing = 4
+
+# Network module
+[modules.network]
+enabled = true
+show_wifi = true
+show_ethernet = true
+
+# Bluetooth module
+[modules.bluetooth]
+enabled = true
+
+# Audio module
+[modules.audio]
+enabled = true
+show_volume = true
+
+# Battery module
+[modules.battery]
+enabled = true
+show_percentage = true
+show_time_remaining = true
+
+# Settings panel module
+[modules.settings]
+enabled = true
+icon = ""
+
+# Settings panel configuration
+[modules.settings.panel]
+show_power_menu = true
+show_audio = true
+show_network = true
+show_bluetooth = true
+show_brightness = true
+show_vpn = true
+show_power_profiles = true
+show_idle_inhibitor = true
+show_airplane_mode = true
+
