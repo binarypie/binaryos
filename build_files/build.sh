@@ -22,7 +22,7 @@ dnf5 -y install fd-find
 
 # Application Launcher - Walker / Elephant
 dnf5 -y copr enable errornointernet/packages
-dnf5 -y install elephant walker-2.7.2
+dnf5 -y install elephant walker
 elephant service enable
 
 # On Screen Display
@@ -33,9 +33,12 @@ dnf5 -y install swayosd
 dnf5 -y install mako
 systemctl --global mask mako.service
 
-# Terminal
+# Terminals
 dnf5 -y copr enable wezfurlong/wezterm-nightly
 dnf5 -y install wezterm
+
+dnf -y copr enable scottames/ghostty
+dnf -y install ghostty
 
 # Editor
 dnf5 -y copr enable agriffis/neovim-nightly
