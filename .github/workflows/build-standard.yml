@@ -1,5 +1,5 @@
 ---
-name: Build NVIDIA container image
+name: Build standard container image
 on:
   pull_request:
     branches:
@@ -27,7 +27,7 @@ concurrency:
 
 jobs:
   build_push:
-    name: Build and push NVIDIA image
+    name: Build and push standard image
     runs-on: ubuntu-24.04
 
     permissions:
@@ -81,11 +81,11 @@ jobs:
           # This generates all the tags for your image, you can add custom tags here too!
           # Default tags are "$DEFAULT_TAG" and "$DEFAULT_TAG.$date".
           tags: |
-            type=raw,value=${{ env.DEFAULT_TAG }}-nvidia
-            type=raw,value=${{ env.DEFAULT_TAG }}-nvidia.{{date 'YYYYMMDD'}}
-            type=raw,value={{date 'YYYYMMDD'}}-nvidia
-            type=sha,enable=${{ github.event_name == 'pull_request' }},suffix=-nvidia
-            type=ref,event=pr,suffix=-nvidia
+            type=raw,value=${{ env.DEFAULT_TAG }}
+            type=raw,value=${{ env.DEFAULT_TAG }}.{{date 'YYYYMMDD'}}
+            type=raw,value={{date 'YYYYMMDD'}}
+            type=sha,enable=${{ github.event_name == 'pull_request' }}
+            type=ref,event=pr
           labels: |
             io.artifacthub.package.readme-url=https://raw.githubusercontent.com/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}/refs/heads/main/README.md
             org.opencontainers.image.created=${{ steps.date.outputs.date }}
@@ -117,7 +117,7 @@ jobs:
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           build-args: |
-            BASE_IMAGE=ghcr.io/ublue-os/bluefin-dx-nvidia:stable-daily
+            BASE_IMAGE=ghcr.io/ublue-os/bluefin-dx:stable-daily
           oci: false
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
