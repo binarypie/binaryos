@@ -21,9 +21,7 @@ dnf5 -y install fd-find
 # TODO: Figure out what we don't need from solopasha/hyprland
 
 # Application Launcher - Walker / Elephant
-dnf5 -y copr enable errornointernet/packages
-dnf5 -y install elephant walker
-elephant service enable
+# Built from source in separate container layers
 
 # On Screen Display
 dnf5 -y copr enable markupstart/SwayOSD
